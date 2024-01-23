@@ -1,3 +1,5 @@
+import { AppDispatch } from '@/redux'
+import { useAppDispatch } from '@/redux/hooks'
 import { Entypo } from '@expo/vector-icons'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useState } from 'react'
@@ -8,9 +10,6 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from 'react-native'
-
-import { AppDispatch } from '@/redux'
-import { useAppDispatch } from '@/redux/hooks'
 import {
   Container,
   FormButton,

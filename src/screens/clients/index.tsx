@@ -13,12 +13,10 @@ import ClientEmpty from '@/components/client-empty'
 import Header from '@/components/header'
 import Separator from '@/components/separator'
 import { useAppSelector } from '@/redux/hooks'
-import { useFocusEffect } from '@react-navigation/native'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { FlatList, View } from 'react-native'
 
 export default function ClientScreen({ navigation }: any) {
-  const [clients, setClients] = useState<Client[]>([])
   const [clientFiltered, setClientFiltered] = useState<
     Client[]
   >([])
@@ -26,16 +24,15 @@ export default function ClientScreen({ navigation }: any) {
   const arrayClients = useAppSelector(state => state.client)
 
   const getCLients = useCallback(async () => {
-    setClients(arrayClients)
     setClientFiltered(arrayClients)
   }, [arrayClients])
 
   const handleSearch = (value: string) => {
-    const data =
-      clients.filter(client =>
-        client.nome.includes(value)
-      ) ||
-      clients.filter(client => client.cpf.includes(value))
+    const data = arrayClients.filter(
+      client =>
+        client.nome.includes(value) ||
+        client.cpf.includes(value)
+    )
 
     setClientFiltered(data)
   }
@@ -44,9 +41,9 @@ export default function ClientScreen({ navigation }: any) {
     <ClientCard item={item} />
   )
 
-  useFocusEffect(() => {
+  useEffect(() => {
     getCLients()
-  })
+  }, [getCLients])
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>

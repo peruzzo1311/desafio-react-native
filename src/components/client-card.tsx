@@ -1,5 +1,6 @@
 import { Client } from '@/types'
 import { FontAwesome6 } from '@expo/vector-icons'
+import { memo } from 'react'
 import { View } from 'react-native'
 import styled from 'styled-components/native'
 
@@ -27,9 +28,7 @@ interface ClientCardProps {
   item: Client
 }
 
-export default function ClientCard({
-  item,
-}: ClientCardProps) {
+function ClientCard({ item }: ClientCardProps) {
   return (
     <Card>
       <FontAwesome6
@@ -46,3 +45,5 @@ export default function ClientCard({
     </Card>
   )
 }
+
+export default memo(ClientCard)
